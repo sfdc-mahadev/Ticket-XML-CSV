@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.lang.reflect.Method;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -55,9 +57,10 @@ public class XML2CSV {
 		String commentsCSV = "";
 		String attachmentsCSV = "";
 		
-		//OrgAndUserCSV(args);
+		
 		try {
-			EntriesCSV(args);
+			//EntriesCSV(args);
+			OrgAndUserCSV(args);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -102,15 +105,16 @@ public class XML2CSV {
 		String xmlOrg = "C:\\Users\\mahadev_wagalgave\\Documents\\Vaishali Thite\\XMLtoCSV\\organizations.xml";
 		String csvOrg = "C:\\Users\\mahadev_wagalgave\\Documents\\Vaishali Thite\\XMLtoCSV\\organizations.csv";
 		String xmlUser = "C:\\Users\\mahadev_wagalgave\\Documents\\Vaishali Thite\\XMLtoCSV\\users.xml";
-		String csvUser = "C:\\Users\\mahadev_wagalgave\\Documents\\Vaishali Thite\\XMLtoCSV\\users.csv";
-				
+		String csvUser = "C:\\Users\\mahadev_wagalgave\\Documents\\Vaishali Thite\\XMLtoCSV\\ExistingUsers.csv";
+		String newcsvUser = "C:\\Users\\mahadev_wagalgave\\Documents\\Vaishali Thite\\XMLtoCSV\\NewUsers.csv";
+		String updatedDate = "";
 		
 		try
 		{
 			
 			
 			System.out.println("Inputs received : " + args.length);
-			if(args.length == 4)
+			if(args.length == 4 || args.length == 5)
 			{
 				for (int i = 0; i < args.length; i++)
 				{
@@ -121,10 +125,24 @@ public class XML2CSV {
 				csvOrg = args[1];
 				xmlUser = args[2];
 				csvUser = args[3];
+				updatedDate = args[4];
+				
+				
+				Date createdOrUpdatedDate = null;
+				
+				if(updatedDate != null && updatedDate != "")
+				{
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+					Date dt = dateFormat.parse(updatedDate);
+					String currentDateTimeString = dateFormat.format(dt);
+					createdOrUpdatedDate = sdf.parse(currentDateTimeString);
+				}
+				
 				
 				 OrgUserCSVUtility obj = new OrgUserCSVUtility();
-				 obj.ConvertOrg2CSV(xmlOrg, csvOrg);
-				 obj.ConvertUser2CSV(xmlUser, csvUser);
+				 obj.ConvertOrg2CSV(xmlOrg, csvOrg, createdOrUpdatedDate);
+				 obj.ConvertUser2CSV(xmlUser, csvUser, createdOrUpdatedDate);
 			    System.out.println("User and Org XML To CSV Conversion has been completed.");
 			}
 			else
@@ -147,10 +165,10 @@ public class XML2CSV {
 		
 		try
 		{
-			String xmlEntry = "C:\\Data\\Projects\\LatestXMLDumps-8Jun\\xml-export-2015-04-30-0825-xml\\druva-20150430\\entries.xml";
-			String newXML = "C:\\Data\\Projects\\LatestXMLDumps-8Jun\\xml-export-2015-04-30-0825-xml\\druva-20150430\\newentries.xml";
-			String csvEntry = "C:\\Data\\Projects\\LatestXMLDumps-8Jun\\xml-export-2015-04-30-0825-xml\\druva-20150430\\entries.csv";
-			String csvEntryAttach = "C:\\Data\\Projects\\LatestXMLDumps-8Jun\\xml-export-2015-04-30-0825-xml\\druva-20150430\\entriesAttach.csv";
+			String xmlEntry = "C:\\Data\\Projects\\15JuneXMLDumps\\entries-27.xml";
+			String newXML = "C:\\Data\\Projects\\15JuneXMLDumps\\newentries.xml";
+			String csvEntry = "C:\\Data\\Projects\\15JuneXMLDumps\\entries.csv";
+			String csvEntryAttach = "C:\\Data\\Projects\\15JuneXMLDumps\\entriesAttach.csv";
 			
 			//ReadNWrite(xmlEntry, newXML);
 			

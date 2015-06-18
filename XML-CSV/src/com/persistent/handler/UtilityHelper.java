@@ -893,15 +893,17 @@ public class UtilityHelper {
 			    	{
 			    		if(ticket != null)
 			    		{
-			    			countTicketsUpdated++;
+			    			
 			    			if(createdOrUpdatedDate == null)
 			    			{
 			    				beanWriter.write(ticket, header, processors);
 			    			}
 			    			else
 			    			{
-			    				if( getFormatedDate(ticket.createdat).compareTo(createdOrUpdatedDate) >= 0 || getFormatedDate(ticket.updatedat).compareTo(createdOrUpdatedDate) >=0)
+			    				System.out.println(getFormatedDate(ticket.createdat) + " --- Is Equal or greater ---  " + createdOrUpdatedDate + " **** " + getFormatedDate(ticket.createdat).compareTo(createdOrUpdatedDate));
+			    				if( (getFormatedDate(ticket.createdat).compareTo(createdOrUpdatedDate) >= 0) || (getFormatedDate(ticket.updatedat).compareTo(createdOrUpdatedDate) >=0))
 			    				{
+			    					countTicketsUpdated++;
 			    					beanWriter.write(ticket, header, processors);
 			    				}
 			    			}
@@ -913,16 +915,18 @@ public class UtilityHelper {
 			    	{
 			    		 if(comment != null)
 			    		 {
-			    			 countCommentsUpdated++;
+			    			 
 			    			 if(createdOrUpdatedDate == null)
 			    			 {
 			    				 beanWriterComment.write(comment, headerComments, processorsComments);
 			    			 }
 			    			 else
 			    			 {
+			    				 System.out.println(getFormatedDate(comment.createdat) + " --- Is Equal or greater ---  " + createdOrUpdatedDate + " **** " + getFormatedDate(comment.createdat).compareTo(createdOrUpdatedDate));
 		    				 	if( getFormatedDate(comment.createdat).compareTo(createdOrUpdatedDate) >= 0 )
 			    				{
-		    					 beanWriterComment.write(comment, headerComments, processorsComments);
+		    				 		countCommentsUpdated++;
+		    				 		beanWriterComment.write(comment, headerComments, processorsComments);
 			    				}
 			    			 }
 			    		 }
@@ -932,15 +936,17 @@ public class UtilityHelper {
 			    	{
 			    		 if(attachment != null)
 			    		 {
-			    			 countAttachmentsUpdated++;
+			    			 
 			    			 if(createdOrUpdatedDate == null)
 			    			 {
 			    				 beanWriterAttachment.write(attachment, headerAttachments, processorsAttachments);
 			    			 }
 			    			 else
 			    			 {
+			    				 System.out.println(getFormatedDate(attachment.createdat) + " --- Is Equal or greater ---  " + createdOrUpdatedDate + " **** " + getFormatedDate(attachment.createdat).compareTo(createdOrUpdatedDate));
 		    				 	if( getFormatedDate(attachment.createdat).compareTo(createdOrUpdatedDate) >= 0 )
 			    				{
+		    				 		countAttachmentsUpdated++;
 		    				 		beanWriterAttachment.write(attachment, headerAttachments, processorsAttachments);
 			    				}
 			    			 }

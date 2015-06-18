@@ -2,6 +2,9 @@ package com.persistent.handler;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import javax.xml.stream.XMLEventReader;
@@ -26,7 +29,19 @@ public class OrgUserCSVUtility {
 	CSVBeanWriterManager beanwritermgrUser = new CSVBeanWriterManager();
 	String csvFileNameUser;
 	ICsvBeanWriter beanWriterUser = null;
+	
+	// For Creating delta results 
+	
+	CSVBeanWriterManager beanwritermgrOrg1 = new CSVBeanWriterManager();
+	String csvFileNameOrg1;
+	ICsvBeanWriter beanWriterOrg1 = null;
 
+	CSVBeanWriterManager beanwritermgrUser1 = new CSVBeanWriterManager();
+	String csvFileNameUser1;
+	ICsvBeanWriter beanWriterUser1 = null;
+	
+	// Ends HEre
+	
 	String[] header = null;
 	CellProcessor[] processors = null;
 
@@ -36,11 +51,21 @@ public class OrgUserCSVUtility {
 	Organization org = null;
 	User user = null;
 
-	public void ConvertOrg2CSV(String xOrg, String cOrg) {
+	public void ConvertOrg2CSV(String xOrg, String cOrg, Date createdOrUpdatedDate) {
 
 		csvFileNameOrg = cOrg;
 		beanWriterOrg = beanwritermgrOrg.getTicketCSVWriter(csvFileNameOrg,
 				"organization");
+		
+		String tempFileName = cOrg;
+		csvFileNameOrg1 = tempFileName.substring(0,tempFileName.lastIndexOf('.') - 1 ).concat("New.csv");
+		
+		System.out.println(csvFileNameOrg1);
+		
+		
+		beanWriterOrg1 = beanwritermgrOrg1.getTicketCSVWriter(csvFileNameOrg1,
+				"organization");
+
 
 		header = getOrgHeader();
 		processors = getOrgCellProcessor();
@@ -142,7 +167,16 @@ public class OrgUserCSVUtility {
 						// empList.add(emp);
 						// tickets.add(ticket);
 						if (org != null)
-							beanWriterOrg.write(org, header, processors);
+						{
+							if(createdOrUpdatedDate != null && (getFormatedDate(org.createdat).compareTo(createdOrUpdatedDate) >=0))
+		    				{
+	    				 		beanWriterOrg1.write(org, header, processors);
+		    				}
+							else if(createdOrUpdatedDate != null && (getFormatedDate(org.updatedat).compareTo(createdOrUpdatedDate) >= 0))
+							{
+								beanWriterOrg.write(org, header, processors);
+							}
+						}
 						org = null;
 					}
 
@@ -156,18 +190,36 @@ public class OrgUserCSVUtility {
 					e.printStackTrace();
 				}
 			}
+			if (beanWriterOrg1 != null) {
+				try {
+					beanWriterOrg1.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 	}
 
-	public void ConvertUser2CSV(String xUser, String cUser) {
+	public void ConvertUser2CSV(String xUser, String cUser, Date createdOrUpdatedDate) {
 
 		csvFileNameUser = cUser;
 		beanWriterUser = beanwritermgrUser.getTicketCSVWriter(csvFileNameUser,
 				"user");
 
+		
+		String tempFileName = cUser;
+		csvFileNameUser1 = tempFileName.substring(0,tempFileName.lastIndexOf('.') - 1 ).concat("New.csv");
+		
+		System.out.println(csvFileNameOrg1);
+		
+		
+		beanWriterUser1 = beanwritermgrUser1.getTicketCSVWriter(csvFileNameUser1,
+				"user");
+		
 		header1 = getUserHeader();
 		processors1 = getUserCellProcessor();
 
@@ -308,7 +360,16 @@ public class OrgUserCSVUtility {
 						// empList.add(emp);
 						// tickets.add(ticket);
 						if (user != null)
-							beanWriterUser.write(user, header1, processors1);
+						{
+							if(createdOrUpdatedDate != null &&  (getFormatedDate(user.createdat).compareTo(createdOrUpdatedDate) >=0))
+		    				{
+								beanWriterUser1.write(user, header1, processors1);
+		    				}
+							else if(createdOrUpdatedDate != null && (getFormatedDate(user.updatedat).compareTo(createdOrUpdatedDate) >= 0) )
+							{
+								beanWriterUser.write(user, header1, processors1);
+							}
+						}
 						user = null;
 					}
 
@@ -322,11 +383,32 @@ public class OrgUserCSVUtility {
 					e.printStackTrace();
 				}
 			}
+			if (beanWriterUser1 != null) {
+				try {
+					beanWriterUser1.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 	}
+	
+	public Date getFormatedDate(String strDate) throws ParseException
+	{
+		Date createdOrUpdatedDate = null;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+		Date dt = dateFormat.parse(strDate);
+		String currentDateTimeString = dateFormat.format(dt);
+		createdOrUpdatedDate = sdf.parse(currentDateTimeString);
+		
+		return createdOrUpdatedDate;
+	}
+	
 
 	public String[] getOrgHeader() {
 		String[] header = { "createdat", "defaultVal", "details", "externalid",
