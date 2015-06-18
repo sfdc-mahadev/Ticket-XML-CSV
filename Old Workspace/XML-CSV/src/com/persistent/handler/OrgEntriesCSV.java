@@ -1,22 +1,9 @@
 package com.persistent.handler;
 
-import java.awt.image.TileObserver;
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Properties;
 
 import javax.xml.stream.XMLEventReader;
@@ -27,14 +14,8 @@ import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.supercsv.cellprocessor.ift.CellProcessor;
-import org.supercsv.encoder.CsvEncoder;
-import org.supercsv.io.CsvListWriter;
 import org.supercsv.io.ICsvBeanWriter;
-import org.supercsv.io.ICsvListWriter;
-import org.supercsv.prefs.CsvPreference;
-import org.supercsv.util.CsvContext;
 
 import com.persistent.models.Attachment;
 import com.persistent.models.Entry;
@@ -256,8 +237,6 @@ public class OrgEntriesCSV {
 	private boolean attach6 = false;
 	private boolean attach7 = false;
 	private boolean attach8 = false;
-	private boolean attach9 = false;
-	private boolean attach10 = false;
 	
 	 Attachment attachment = null;
 	 
@@ -277,9 +256,6 @@ public class OrgEntriesCSV {
 		factory.setProperty(XMLInputFactory.IS_REPLACING_ENTITY_REFERENCES , false);
 		factory.setProperty(XMLInputFactory.IS_COALESCING, true);   
     	
-		List<Entry> lstEntries = new ArrayList<Entry>();
-		
-		
 		try {
 			
 			beanWriterEntries = beanwritermgrEntries.getTicketCSVWriter(EntryCSVFile,
@@ -297,8 +273,6 @@ public class OrgEntriesCSV {
 			
 			XMLStreamReader streamReader = factory.createXMLStreamReader(
 				    new FileReader(xmlFile));
-			
-			String entryId = "";
 			
 			while(streamReader.hasNext())
 			{

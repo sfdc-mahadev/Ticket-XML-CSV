@@ -88,6 +88,16 @@ public class CSVBeanWriterManager {
 	}
 	
 	
+	public String[] getPostHeader() {
+		String[] header = {"accountid","body","createdat","entryid","forumid","id","isinformative","updatedat","userid"};
+		return header;
+	} 
+	
+	public CellProcessor[] getPostCellProcessor() {
+		CellProcessor[] processors = new CellProcessor[9];
+		return processors;
+	}
+	
 	
 	/**
 	 * @param csvFileName - CSV file Name
@@ -117,6 +127,8 @@ public class CSVBeanWriterManager {
 		        beanWriter.writeHeader(getEntryHeader());
 	       if("entry-attach".equalsIgnoreCase(type))
 		        beanWriter.writeHeader(getEntryAttachmentHeader());
+	       if("post".equalsIgnoreCase(type))
+		        beanWriter.writeHeader(getPostHeader());
 	       
 	       
 	    } catch (IOException ex) {

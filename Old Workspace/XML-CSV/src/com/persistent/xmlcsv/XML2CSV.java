@@ -60,7 +60,12 @@ public class XML2CSV {
 		
 		try {
 			//EntriesCSV(args);
-			OrgAndUserCSV(args);
+			//OrgAndUserCSV(args);
+			PostsCSV po = new PostsCSV();
+			String xPost = "C:\\Data\\Projects\\15JuneXMLDumps\\posts.xml";
+			String cPost = "C:\\Data\\Projects\\15JuneXMLDumps\\posts.csv";
+			po.StAXParsePosts(xPost, cPost);
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -106,7 +111,6 @@ public class XML2CSV {
 		String csvOrg = "C:\\Users\\mahadev_wagalgave\\Documents\\Vaishali Thite\\XMLtoCSV\\organizations.csv";
 		String xmlUser = "C:\\Users\\mahadev_wagalgave\\Documents\\Vaishali Thite\\XMLtoCSV\\users.xml";
 		String csvUser = "C:\\Users\\mahadev_wagalgave\\Documents\\Vaishali Thite\\XMLtoCSV\\ExistingUsers.csv";
-		String newcsvUser = "C:\\Users\\mahadev_wagalgave\\Documents\\Vaishali Thite\\XMLtoCSV\\NewUsers.csv";
 		String updatedDate = "";
 		
 		try
@@ -126,7 +130,6 @@ public class XML2CSV {
 				xmlUser = args[2];
 				csvUser = args[3];
 				updatedDate = args[4];
-				
 				
 				Date createdOrUpdatedDate = null;
 				
