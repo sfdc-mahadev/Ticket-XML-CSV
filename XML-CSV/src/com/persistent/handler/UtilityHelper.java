@@ -636,7 +636,10 @@ public class UtilityHelper {
 			    	}
 			    	if(ticket6 == true)
 			    	{
-			    		ticket.createdat = streamReader.getText();
+			    		if(ticket != null &&  (comment == null && attachment ==null))
+			    		{
+			    			ticket.createdat = streamReader.getText();
+			    		}
 			    		ticket6 = false;
 			    	}
 			    	if(ticket7 == true)
@@ -820,8 +823,6 @@ public class UtilityHelper {
 			    	}
 			    	if(comment7 == true)
 			    	{
-			    		
-			    		System.out.println(comment);
 			    		comment.value = streamReader.getText() != null && streamReader.getText() != "" ? streamReader.getText() : "";
 			    		comment7 = false;
 			    	}
@@ -835,6 +836,7 @@ public class UtilityHelper {
 			    	
 			    	if(attach1 == true)
 			    	{
+			    		attachment.authorid = comment.authorid;
 			    		attachment.ticketId = ticketUId;
 			    		attach1 = false;
 			    	}
@@ -1429,12 +1431,12 @@ public class UtilityHelper {
 	}
 	
 	public String[] getAttachmentHeader() {
-		String[] header = {"ticketId","commentId","contenttype","createdat","filename","id","ispublic","size","token","url"};
+		String[] header = {"ticketId","commentId","authorid","contenttype","createdat","filename","id","ispublic","size","token","url"};
 		return header;
 	} 
 	
 	public CellProcessor[] getAttachmentCellProcessor() {
-		CellProcessor[] processors = new CellProcessor[10];
+		CellProcessor[] processors = new CellProcessor[11];
 		return processors;
 	}
 }

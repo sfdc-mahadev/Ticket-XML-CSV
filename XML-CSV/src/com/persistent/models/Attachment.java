@@ -16,6 +16,13 @@ public class Attachment {
 	public String url;
 	public String ticketId;
 	public String commentId;
+	public String authorid;
+	public String getAuthorId() {
+		return authorid;
+	}
+	public void setAuthorId(String authorId) {
+		this.authorid = authorId;
+	}
 	/**
 	 * @return the ticketId
 	 */

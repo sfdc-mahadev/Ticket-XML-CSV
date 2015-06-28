@@ -74,7 +74,7 @@ public class ReadUsingCBR {
 	}
 	
 	public String[] getAttachmentHeader() {
-		String[] header = {"ticketId","commentId","contenttype","createdat","filename","id","ispublic","size","token","url","localUrl"};
+		String[] header = {"ticketId","commentId","authorid","contenttype","createdat","filename","id","ispublic","size","token","url"};
 		return header;
 	} 
 	

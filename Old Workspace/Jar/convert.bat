@@ -1,1 +1,0 @@
-java -jar Ticket-XML-CSV.jar C:\Data\Projects\XML-CSV-Tickets-Druva\SourceFiles\ticketWithIds.xml C:\Data\Projects\XML-CSV-Tickets-Druva\OutputFiles\TicketCSV.csv C:\Data\Projects\XML-CSV-Tickets-Druva\OutputFiles\CommentCSV.csv C:\Data\Projects\XML-CSV-Tickets-Druva\OutputFiles\AttachCSV.csv

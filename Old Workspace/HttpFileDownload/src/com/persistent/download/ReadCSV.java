@@ -44,7 +44,7 @@ public class ReadCSV {
             	System.out.println(line);
                 String[] tokens = line.split(COMMA_DELIMITER);
                 
-                if (tokens.length == 10) {
+                if (tokens.length == 11) {
                 	//Create a new student object and fill his  data
 					//Student student = new Student(Long.parseLong(tokens[STUDENT_ID_IDX]), tokens[STUDENT_FNAME_IDX], tokens[STUDENT_LNAME_IDX], tokens[STUDENT_GENDER], Integer.parseInt(tokens[STUDENT_AGE]));
 					//students.add(student);
@@ -52,7 +52,7 @@ public class ReadCSV {
                 	//	ticketId, commentId, contenttype,createdat,filename,id,ispublic,size,token,url
                 	//System.out.println(dirPath);
                 	
-                	String[] fntokens = tokens[4].split("\\.(?=[^\\.]+$)");
+                	String[] fntokens = tokens[5].split("\\.(?=[^\\.]+$)");
                 	String tempFileName = "";
                 	if(fntokens.length == 2)
                 	{
@@ -60,22 +60,23 @@ public class ReadCSV {
                 	}
                 	else
                 	{
-                		tempFileName = tokens[4] + fileSuffix++;
+                		tempFileName = tokens[5] + fileSuffix++;
                 	}
                 	
                 	Attachment rec = new Attachment();
                 	System.out.println(tokens.length);
                 	rec.commentId = tokens[1] != null ? tokens[1] : "";
-                	rec.contenttype = tokens[2]!= null ? tokens[2] : "";
-                	rec.createdat = tokens[3]!= null ? tokens[3] : "";
-                	rec.filename = tokens[4]!= null ? tokens[4] : "";
-                	rec.ispublic = tokens[6]!= null ? tokens[6] : "";
-                	rec.id = tokens[5]!= null ? tokens[5] : "";
+                	rec.authorid = tokens[2]!= null ? tokens[2] : "";
+                	rec.contenttype = tokens[3]!= null ? tokens[3] : "";
+                	rec.createdat = tokens[4]!= null ? tokens[4] : "";
+                	rec.filename = tokens[5]!= null ? tokens[5] : "";
+                	rec.ispublic = tokens[7]!= null ? tokens[7] : "";
+                	rec.id = tokens[6]!= null ? tokens[6] : "";
                 	rec.localUrl = dirPath.concat("\\".concat(tempFileName));
-                	rec.size = tokens[7]!= null ? tokens[7] : "";
+                	rec.size = tokens[8]!= null ? tokens[8] : "";
                 	rec.ticketId = tokens[0]!= null ? tokens[0] : "";
-                	rec.token = tokens[8]!= null ? tokens[8] : "";
-                	rec.url = tokens[9]!= null ? tokens[9] : "";
+                	rec.token = tokens[9]!= null ? tokens[9] : "";
+                	rec.url = tokens[10]!= null ? tokens[10] : "";
                 	
                 	attachments.add(rec);
                 	

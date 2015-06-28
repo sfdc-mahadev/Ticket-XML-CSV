@@ -18,7 +18,7 @@ public class WriteCSV {
 		private static final String NEW_LINE_SEPARATOR = "\n";
 		
 		//CSV file header
-		private static final String FILE_HEADER = "ticketId,commentId,contenttype,createdat,filename,id,ispublic,size,token,url,localUrl";
+		private static final String FILE_HEADER = "ticketId,commentId,authorid,contenttype,createdat,filename,id,ispublic,size,token,url,localUrl";
 
 		public static void writeCsvFile(String fileName, ArrayList<Attachment> lstAttachments) {
 			
@@ -44,6 +44,9 @@ public class WriteCSV {
 					fileWriter.append(COMMA_DELIMITER);
 					
 					fileWriter.append(String.valueOf(attach.getCommentId()));
+					fileWriter.append(COMMA_DELIMITER);
+					
+					fileWriter.append(String.valueOf(attach.getAuthorId()));
 					fileWriter.append(COMMA_DELIMITER);
 					
 					fileWriter.append(String.valueOf(attach.getContenttype()));

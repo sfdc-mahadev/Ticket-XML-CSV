@@ -35,12 +35,12 @@ public class CSVBeanWriterManager {
 	}
 	
 	public String[] getAttachmentHeader() {
-		String[] header = {"ticketId","commentId","contenttype","createdat","filename","id","ispublic","size","token","url"};
+		String[] header = {"ticketId","commentId","authorid","contenttype","createdat","filename","id","ispublic","size","token","url"};
 		return header;
 	} 
 	
 	public CellProcessor[] getAttachmentCellProcessor() {
-		CellProcessor[] processors = new CellProcessor[10];
+		CellProcessor[] processors = new CellProcessor[11];
 		return processors;
 	}
 	

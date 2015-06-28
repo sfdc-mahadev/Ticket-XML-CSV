@@ -64,6 +64,12 @@ public class XML2CSV {
 			PostsCSV po = new PostsCSV();
 			String xPost = "C:\\Data\\Projects\\15JuneXMLDumps\\posts.xml";
 			String cPost = "C:\\Data\\Projects\\15JuneXMLDumps\\posts.csv";
+			
+			if(args.length == 2)
+			{
+				 xPost = args[0];
+				 cPost = args[1];
+			}
 			po.StAXParsePosts(xPost, cPost);
 			
 		} catch (Exception e) {

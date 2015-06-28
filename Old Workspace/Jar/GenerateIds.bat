@@ -1,1 +1,0 @@
-java -jar GenerateTicketIds.jar C:\Data\Projects\XML-CSV-Tickets-Druva\SourceFiles\tickets.xml C:\Data\Projects\XML-CSV-Tickets-Druva\OutputFiles\newtickets.xml

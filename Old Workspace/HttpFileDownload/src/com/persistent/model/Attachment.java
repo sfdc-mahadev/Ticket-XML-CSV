@@ -17,6 +17,14 @@ public class Attachment {
 	public String ticketId;
 	public String commentId;
 	public String localUrl;
+	public String authorid;
+	
+	public String getAuthorId() {
+		return authorid;
+	}
+	public void setAuthorId(String authorId) {
+		this.authorid = authorId;
+	}
 	
 	public String getLocalUrl() {
 		return localUrl;
